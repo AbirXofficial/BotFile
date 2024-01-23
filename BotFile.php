@@ -4,38 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Designing an Informative Index Page for Your Telegram Bot</title>
+    <title>Data Capture Display</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            margin: 20px;
+            background-color: #f0f8ff; /* Light Blue */
         }
 
-        header,
-        section,
-        footer {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
+        .entry {
+            border: 1px solid #008080; /* Teal */
+            border-radius: 8px;
             margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background-color: #e0f8f7; /* Light Cyan */
+        }
+
+        .number {
+            font-size: 18px;
+            color: #008080; /* Teal */
+        }
+
+        .response {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f0f8ff; /* Light Blue */
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        .timestamp {
+            color: #006400; /* Dark Green */
+            font-size: 14px;
+        }
+
+        /* Additional Styles for the Telegram Bot Page */
+        header {
+            background-color: #3498db; /* Dodger Blue */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
         }
 
         header h1 {
             margin: 0;
+            font-size: 28px;
         }
 
         header p {
-            color: #555;
+            font-size: 16px;
         }
 
         section h2 {
-            color: #333;
+            color: #3498db; /* Dodger Blue */
         }
 
         ul {
@@ -45,18 +66,19 @@
 
         li {
             margin-bottom: 5px;
+            color: #333;
         }
 
         blockquote {
             font-style: italic;
-            color: #777;
-            border-left: 2px solid #333;
+            color: #555;
+            border-left: 2px solid #3498db; /* Dodger Blue */
             padding-left: 10px;
             margin: 10px 0;
         }
 
         a {
-            color: #007bff;
+            color: #3498db; /* Dodger Blue */
         }
 
         a:hover {
@@ -66,7 +88,7 @@
         .cta-button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #3498db; /* Dodger Blue */
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -76,6 +98,9 @@
             text-align: center;
             color: #777;
             margin-top: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
         }
     </style>
 </head>
@@ -117,7 +142,7 @@
 
     <section id="community">
         <h2>Community and Support</h2>
-        <p>Join our Telegram group for support and updates: <a href="your-telegram-group-link" target="_blank">Telegram Group</a></p>
+        <p>Join our Telegram group for support and updates: <a href="https://t.me/BugCodeFiNDER" target="_blank">Telegram Group</a></p>
     </section>
 
     <section id="social-proof">
@@ -130,12 +155,36 @@
     <section id="download">
         <h2>Get Started Now</h2>
         <p>Download Your Telegram Bot and enhance your Telegram experience.</p>
-        <a href="download-link" class="cta-button">Download Now</a>
+        <a href="https://t.me/BugCodeFiNDER" class="cta-button">Download Now</a>
     </section>
 
     <footer>
-        <p>Contact us at: <a href="mailto:your@email.com">your@email.com</a></p>
+        <p>Contact us at: <a href="mailto:contact@foxithub.com">contact@foxithub.com</a></p>
     </footer>
+
+    <!-- PHP code for Data Capture Display -->
+    <?php
+    // Read the content of DataCapture.json file
+    $dataCaptureFile = 'DataCapture.json';
+    $dataCaptureContent = file_get_contents($dataCaptureFile);
+
+    // Decode the JSON content
+    $dataCaptureArray = json_decode($dataCaptureContent, true);
+
+    // Check if decoding was successful
+    if ($dataCaptureArray === null) {
+        echo "<p>Error decoding JSON.</p>";
+    } else {
+        // Loop through each entry and display formatted content
+        foreach ($dataCaptureArray as $entry) {
+            echo "<div class='entry'>";
+            echo "<p class='number'><strong>Number:</strong> " . htmlspecialchars($entry['number']) . "</p>";
+            echo "<div class='response'><strong>Response:</strong><br><pre>" . htmlspecialchars(json_encode($entry['response'], JSON_PRETTY_PRINT)) . "</pre></div>";
+            echo "<p class='timestamp'><strong>Timestamp:</strong> " . date('Y-m-d H:i:s', $entry['timestamp']) . "</p>";
+            echo "</div>";
+        }
+    }
+    ?>
 </body>
 
 </html>
